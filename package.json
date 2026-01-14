@@ -26,6 +26,7 @@
     "@fortawesome/fontawesome-free": "^7.1.0",
     "bootstrap": "^5.3.8",
     "express": "^4.18.2",
+    "ngx-spinner": "^21.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"

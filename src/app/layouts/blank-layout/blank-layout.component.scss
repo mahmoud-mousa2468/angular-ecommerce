@@ -1,0 +1,24 @@
+$main-color: #0aad0a;
+
+:host {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+}
+.btn-up {
+  background-color: $main-color;
+  display: flex;
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  z-index: 99;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  color: white;
+  border-radius: 10px;
+  border: unset;
+  font-size: 20px;
+}
