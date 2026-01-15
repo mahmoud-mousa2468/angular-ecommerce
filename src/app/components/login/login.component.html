@@ -1,1 +1,57 @@
-<p>login works!</p>
+<section class="rounded shadow w-75 m-auto my-3 p-3 bg-main-light">
+  <form [formGroup]="loginForm" class="" (ngSubmit)="handleForm()">
+    <p class="text-capitalize">login now</p>
+    <div class="form-item">
+      <label for="email">E-mail</label>
+      <input
+        class="form-control"
+        formControlName="email"
+        type="email"
+        name="email"
+        id="email"
+      />
+      @if (loginForm.get('email')?.errors&&loginForm.get('email')?.touched ) {
+      <div class="alert alert-danger p-1 small">
+        @if (loginForm.get('email')?.getError('required') ) {
+        <p class="mb-0">email is Required</p>
+        } @else if (loginForm.get('email')?.getError('email')) {
+        <p class="mb-0">Email is inCorrect</p>
+        }
+      </div>
+      }
+    </div>
+    <div class="form-item">
+      <label for="password">Password</label>
+      <input
+        class="form-control"
+        formControlName="password"
+        type="password"
+        name="password"
+        id="password"
+      />
+      @if (loginForm.get('password')?.errors&&loginForm.get('password')?.touched
+      ) {
+      <div class="alert alert-danger p-1 small">
+        @if (loginForm.get('password')?.getError('required') ) {
+        <p class="mb-0">Password is Required</p>
+        } @else if (loginForm.get('password')?.getError('pattern')) {
+        <p class="mb-0">Password is inCorrect</p>
+        }
+      </div>
+      }
+    </div>
+    <div class="d-flex justify-content-between">
+      <button
+        [disabled]="loginForm.invalid"
+        class="btn-main mt-2 text-capitalize"
+      >
+        login @if (isloading ) {
+        <i class="fa-solid fa-spinner fa-spin"></i>
+        }
+      </button>
+      <a class="btn-main mt-2 text-capitalize" routerLink="/forgetpassword"
+        >forget password
+      </a>
+    </div>
+  </form>
+</section>
