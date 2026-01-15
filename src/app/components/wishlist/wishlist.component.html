@@ -1,1 +1,64 @@
-<p>wishlist works!</p>
+@if (products.length>0) {
+<section class="pt-4 pb-2 container-fluid">
+  <div class="row g-3">
+    @for (product of products; track $index) {
+    <div class="col-sm-6 col-md-3 col-lg-2">
+      <div class="product p-1 small">
+        @if (!wishList.includes(product._id)) {
+        <span (click)="addToWishList(product.id)"
+          ><i class="fa-regular fa-heart heart"></i
+        ></span>
+        } @else if (wishList.includes(product._id)) {
+        <span (click)="removeFromWishList(product.id)"
+          ><i class="fa-solid fa-heart heart text-danger"></i
+        ></span>
+        }
+        <header role="button" [routerLink]="['/productdetail', product.id]">
+          <img
+            class="w-100"
+            [src]="product.imageCover"
+            [title]="product.title"
+            [alt]="product.title"
+          />
+          <h4 class="h5 text-main">{{ product.category.name }}</h4>
+          <h5 class="h6 text-main">{{ product.title | cuttext : 2 }}</h5>
+          <div class="d-flex justify-content-between">
+            <span>
+              {{ product.price | currency : "USD" : "symbol" : "1.0-0" }}
+            </span>
+            <div>
+              @for (num of [1,2,3,4,5].slice(0,product.ratingsAverage); track
+              $index) {
+              <span
+                class="star"
+                [ngStyle]="{ background: getStarBackground(1) }"
+              >
+              </span>
+              } @if (product.ratingsAverage%1!==0) {
+              <span
+                class="star"
+                [ngStyle]="{
+                  background: getStarBackground(product.ratingsAverage % 1)
+                }"
+              >
+              </span>
+              }
+              <span class="ms-1">{{ product.ratingsAverage }}</span>
+            </div>
+          </div>
+        </header>
+        <footer>
+          <button
+            (click)="addtocart(product.id, btnAdd)"
+            #btnAdd
+            class="text-capitalize btn-main w-100"
+          >
+            add to cart
+          </button>
+        </footer>
+      </div>
+    </div>
+    }
+  </div>
+</section>
+}

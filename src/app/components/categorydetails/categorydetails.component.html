@@ -1,1 +1,13 @@
-<p>categorydetails works!</p>
+<section class="my-4" @if(categorydetails)>
+  <div class="container">
+    <div class="row g-4">
+      @for (item of categorydetails; track $index) {
+      <div class="col-sm-6 col-md-3">
+        <div class="rounded shadow p-2 border border-success">
+          <h3 class="text-main small">{{ item.name }}</h3>
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+</section>

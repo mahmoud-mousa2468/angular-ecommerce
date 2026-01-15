@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Ibrands } from '../../core/interfaces/ibrand';
+import { BrandService } from '../../core/services/brand.service';
 
 @Component({
   selector: 'app-brands',
@@ -8,5 +10,13 @@ import { Component } from '@angular/core';
   styleUrl: './brands.component.scss'
 })
 export class BrandsComponent {
-
+  private readonly _BrandService = inject(BrandService)
+  brandsData: Ibrands[] = []
+  ngOnInit(): void {
+    this._BrandService.getAllBrands().subscribe({
+      next: (res) => {
+        this.brandsData = res.data
+      }
+    })
+  }
 }

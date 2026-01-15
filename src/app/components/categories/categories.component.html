@@ -1,1 +1,23 @@
-<p>categories works!</p>
+<section class="my-4" @if(categoriesData)>
+  <div class="container">
+    <div class="row g-4">
+      @for (category of categoriesData; track $index) {
+      <div
+        class="col-sm-6 col-md-3"
+        role="button"
+        [routerLink]="['/categorydetail', category._id]"
+      >
+        <div class="rounded shadow p-2 border border-success">
+          <img
+            [src]="category.image"
+            [alt]="category.name"
+            class="w-100 mb-2"
+            height="270px"
+          />
+          <h3 class="text-main small">{{ category.name }}</h3>
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+</section>
