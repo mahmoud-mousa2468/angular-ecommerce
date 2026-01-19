@@ -16,23 +16,31 @@ import { SearchPipe } from '../../core/pipes/search.pipe';
 @Component({
   selector: 'app-home',
   standalone: true,
-    imports: [RouterLink, SearchPipe, CuttextPipe, CarouselModule, NgStyle, CurrencyPipe, FormsModule],
+  imports: [
+    RouterLink,
+    SearchPipe,
+    CuttextPipe,
+    CarouselModule,
+    NgStyle,
+    CurrencyPipe,
+    FormsModule,
+  ],
 
   templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+  styleUrl: './home.component.scss',
 })
 export class HomeComponent {
-  term: string = ''
+  term: string = '';
   categories: Icategory[] = [];
   products: Iproduct[] = [];
-  wishList: string[] = []
+  wishList: string[] = [];
   private readonly _ProductService = inject(ProductService);
   // Renderer2 has the method that can access DOM
-  private readonly _Renderer2 = inject(Renderer2)
-  private readonly _CartService = inject(CartService)
+  private readonly _Renderer2 = inject(Renderer2);
+  private readonly _CartService = inject(CartService);
   private readonly _CategoryService = inject(CategoryService);
-  private readonly _ToastrService = inject(ToastrService)
-  private readonly _WishlistService = inject(WishlistService)
+  private readonly _ToastrService = inject(ToastrService);
+  private readonly _WishlistService = inject(WishlistService);
 
   mainSlider: OwlOptions = {
     loop: true,
@@ -88,41 +96,41 @@ export class HomeComponent {
     });
     this._WishlistService.getAllWishlist().subscribe({
       next: (res) => {
-        console.log(res.data)
-        this.wishList = res.data.map((term: any) => term._id)
-      }
-    })
+        console.log(res.data);
+        this.wishList = res.data.map((term: any) => term._id);
+      },
+    });
   }
   addToWishList(prodId: any): void {
     this._WishlistService.addProductToWishlist(prodId).subscribe({
       next: (res) => {
-        this._ToastrService.success(res.message)
-        this.wishList = res.data
+        this._ToastrService.success(res.message);
+        this.wishList = res.data;
         this._WishlistService.productsWishListNum.next(res.data.length);
-      }
-    })
+      },
+    });
   }
   removeFromWishList(prodId: any): void {
     this._WishlistService.removeFromWishlist(prodId).subscribe({
       next: (res) => {
-        this._ToastrService.success(res.message)
-        this.wishList = res.data
+        this._ToastrService.success(res.message);
+        this.wishList = res.data;
         this._WishlistService.productsWishListNum.next(res.data.length);
-        
-      }
-    })
+      },
+    });
   }
   addtocart(id: any, element: HTMLButtonElement): void {
-    this._Renderer2.setAttribute(element, 'disabled', 'true')
+    this._Renderer2.setAttribute(element, 'disabled', 'true');
     this._CartService.addProductToCart(id).subscribe({
       next: (res) => {
+        console.log('kkkkkk');
         if (res.status == 'success') {
           this._CartService.cartNum.next(res.numOfCartItems);
-          this._ToastrService.success(res.message, 'Fresh Cart')
-          this._Renderer2.removeAttribute(element, 'disabled')
+          this._ToastrService.success(res.message, 'Fresh Cart');
+          this._Renderer2.removeAttribute(element, 'disabled');
         }
-      }
-    })
+      },
+    });
   }
   getStarBackground(filledFraction: number): string {
     // Generate the linear gradient: a percentage of gold and the rest transparent

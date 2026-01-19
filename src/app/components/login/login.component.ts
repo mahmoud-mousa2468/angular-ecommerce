@@ -36,7 +36,7 @@ export class LoginComponent {
         next: (res) => {
           if (res.message == 'success') {
             this.isloading = false;
-            localStorage.setItem('userToken', res.token);
+            localStorage.setItem('uToken', res.token);
             this._Router.navigate(['/home']);
           }
         },

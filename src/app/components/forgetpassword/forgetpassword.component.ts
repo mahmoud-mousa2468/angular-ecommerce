@@ -64,7 +64,7 @@ export class ForgetpasswordComponent {
     this._AuthService.resetPassword(formData).subscribe({
       next: (res) => {
         if (res.token) {
-          localStorage.setItem('userToken', res.token);
+          localStorage.setItem('uToken', res.token);
           this._Router.navigate(['/home']);
           this._Renderer2.removeAttribute(e, 'disabled');
         }

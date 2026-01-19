@@ -9,12 +9,12 @@ import {
 } from '@angular/core';
 import { CartService } from '../../core/services/cart.service';
 import { WishlistService } from '../../core/services/wishlist.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-nav-blank',
   standalone: true,
-  imports: [],
+  imports: [RouterLink, RouterLinkActive],
   templateUrl: './nav-blank.component.html',
   styleUrl: './nav-blank.component.scss',
 })
@@ -59,7 +59,7 @@ export class NavBlankComponent implements OnInit {
     });
   }
   signOut(): void {
-    localStorage.removeItem('userToken');
+    localStorage.removeItem('uToken');
     this._Router.navigate(['/login']);
   }
 }
