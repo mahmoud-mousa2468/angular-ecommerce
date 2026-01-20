@@ -1,5 +1,5 @@
 import { CurrencyPipe } from '@angular/common';
-import { Component, inject, Renderer2 } from '@angular/core';
+import { Component, inject, OnInit, Renderer2 } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Icart } from '../../core/interfaces/icart';
 import { CartService } from '../../core/services/cart.service';
@@ -11,7 +11,7 @@ import { CartService } from '../../core/services/cart.service';
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss'
 })
-export class CartComponent {
+export class CartComponent implements OnInit {
   private readonly _CartService = inject(CartService)
   private readonly _Renderer2 = inject(Renderer2)
   cart = {} as Icart;

@@ -1,4 +1,4 @@
-import { Component, inject, Renderer2 } from '@angular/core';
+import { Component, inject, OnInit, Renderer2 } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Iproduct } from '../../core/interfaces/iproduct';
 import { CartService } from '../../core/services/cart.service';
@@ -17,7 +17,7 @@ import { CuttextPipe } from '../../core/pipes/cuttext.pipe';
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss'
 })
-export class ProductsComponent {
+export class ProductsComponent implements  OnInit {
   products: Iproduct[] = [];
   pageSize: number = 0;
   currentPage: number = 0;

@@ -59,7 +59,7 @@ export class NavBlankComponent implements OnInit {
     });
   }
   signOut(): void {
-    localStorage.removeItem('uToken');
+    localStorage.removeItem('userToken');
     this._Router.navigate(['/login']);
   }
 }

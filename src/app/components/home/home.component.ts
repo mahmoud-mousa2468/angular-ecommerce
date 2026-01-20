@@ -1,4 +1,4 @@
-import { Component, inject, Renderer2 } from '@angular/core';
+import { Component, inject, OnInit, Renderer2 } from '@angular/core';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { ToastrService } from 'ngx-toastr';
 import { Icategory } from '../../core/interfaces/icategory';
@@ -29,7 +29,7 @@ import { SearchPipe } from '../../core/pipes/search.pipe';
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   term: string = '';
   categories: Icategory[] = [];
   products: Iproduct[] = [];

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Icategory } from '../../core/interfaces/icategory';
 import { CategoryService } from '../../core/services/category.service';
@@ -10,7 +10,7 @@ import { CategoryService } from '../../core/services/category.service';
   templateUrl: './categories.component.html',
   styleUrl: './categories.component.scss'
 })
-export class CategoriesComponent {
+export class CategoriesComponent implements OnInit {
 private readonly _CategoriesService=inject(CategoryService)
   categoriesData:Icategory[]=[]
   ngOnInit(): void {

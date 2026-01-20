@@ -12,12 +12,13 @@
             formControlName="details"
           ></textarea>
         </div>
-        @if (orderForm.get('details')?.errors
-        &&(orderForm.get('details')?.touched||orderForm.get('details')?.dirty))
-        {
-        <div class="alert alert-danger mt-2 w-50 m-auto text-capitalize p-2">
-          this field is required
-        </div>
+        @if (
+          orderForm.get("details")?.errors &&
+          (orderForm.get("details")?.touched || orderForm.get("details")?.dirty)
+        ) {
+          <div class="alert alert-danger mt-2 m-auto text-capitalize p-2">
+            this field is required
+          </div>
         }
         <div class="form-item">
           <label class="text-capitalize" for="phone">phone</label>
@@ -29,17 +30,20 @@
             formControlName="phone"
           />
         </div>
-        @if (orderForm.get('phone')?.errors &&
-        (orderForm.get('phone')?.touched||orderForm.get('phone')?.dirty)){ @if
-        (orderForm.get('phone')?.getError('required')) {
-        <div class="alert alert-danger mt-2 w-50 m-auto text-capitalize p-2">
-          this field is required
-        </div>
-        }@else if(orderForm.get('phone')?.getError('pattern')){
-        <div class="alert alert-danger mt-2 w-50 m-auto text-capitalize p-2">
-          this field is not correct
-        </div>
-        } }
+        @if (
+          orderForm.get("phone")?.errors &&
+          (orderForm.get("phone")?.touched || orderForm.get("phone")?.dirty)
+        ) {
+          @if (orderForm.get("phone")?.getError("required")) {
+            <div class="alert alert-danger mt-2 m-auto text-capitalize p-2">
+              this field is required
+            </div>
+          } @else if (orderForm.get("phone")?.getError("pattern")) {
+            <div class="alert alert-danger mt-2 m-auto text-capitalize p-2">
+              this field is not correct
+            </div>
+          }
+        }
         <div class="form-item">
           <label class="text-capitalize" for="city">city</label>
           <input
@@ -50,13 +54,16 @@
             formControlName="city"
           />
         </div>
-        @if (orderForm.get('city')?.errors &&
-        (orderForm.get('city')?.touched||orderForm.get('city')?.dirty)) { @if
-        (orderForm.get('city')?.getError('required')) {
-        <div class="alert alert-danger mt-2 w-50 m-auto text-capitalize p-2">
-          this field is required
-        </div>
-        } }
+        @if (
+          orderForm.get("city")?.errors &&
+          (orderForm.get("city")?.touched || orderForm.get("city")?.dirty)
+        ) {
+          @if (orderForm.get("city")?.getError("required")) {
+            <div class="alert alert-danger mt-2 m-auto text-capitalize p-2">
+              this field is required
+            </div>
+          }
+        }
         <button class="btn-main text-capitalize mt-3">check out</button>
       </form>
     </div>
