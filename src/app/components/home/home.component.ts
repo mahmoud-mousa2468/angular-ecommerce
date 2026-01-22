@@ -96,7 +96,6 @@ export class HomeComponent implements OnInit {
     });
     this._WishlistService.getAllWishlist().subscribe({
       next: (res) => {
-        console.log(res.data);
         this.wishList = res.data.map((term: any) => term._id);
       },
     });
@@ -123,7 +122,6 @@ export class HomeComponent implements OnInit {
     this._Renderer2.setAttribute(element, 'disabled', 'true');
     this._CartService.addProductToCart(id).subscribe({
       next: (res) => {
-        console.log('kkkkkk');
         if (res.status == 'success') {
           this._CartService.cartNum.next(res.numOfCartItems);
           this._ToastrService.success(res.message, 'Fresh Cart');
