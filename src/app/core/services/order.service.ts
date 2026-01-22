@@ -12,7 +12,7 @@ export class OrderService {
     // window.location.origin >> بتجيب رابط الموقع الحالي أوتوماتيك
     // مثال: https://your-app.vercel.app
     return this._HttpClient.post(
-      `${environment.apiUrl}orders/checkout-session/${id}?url=${window.location.origin}`,
+      `${environment.apiUrl}orders/checkout-session/${id}?url=${window.location.origin}/%23`,
       {
         shippingAddress: userInfo,
       },
