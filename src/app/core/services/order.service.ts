@@ -8,16 +8,14 @@ import { environment } from '../environments/environment';
 })
 export class OrderService {
   constructor(private _HttpClient: HttpClient) {}
-  
   checkOutSession(id: any, userInfo: object): Observable<any> {
     // window.location.origin >> بتجيب رابط الموقع الحالي أوتوماتيك
-  // مثال: https://your-app.vercel.app
+    // مثال: https://your-app.vercel.app
     return this._HttpClient.post(
-      `${environment.apiUrl}orders/checkout-session/${id}?url=${window.location.origin}`,
+      `${environment.apiUrl}orders/checkout-session/${id}?url=${window.location.origin}/%23`,
       {
         shippingAddress: userInfo,
       },
     );
-    
   }
 }
