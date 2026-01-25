@@ -8,30 +8,30 @@ A comprehensive e-commerce application built with **Angular 17**. This project f
 ---
 
 ## 📱 Application Preview
-![App Walkthrough](screenshots/all.gif)
+![App Walkthrough](screenShots/all.gif)
 
 ---
 
-## 📸 Screenshots & Features
+## 📸 ScreenShots & Features
 
 ### 🛍️ Browsing & Discovery
 | Home Page | Categories |
 | :---: | :---: |
-| ![Home Page](screenshots/home.png) | ![Categories](screenshots/categories.png) |
+| ![Home Page](screenShots/home.png) | ![Categories](screenShots/categories.png) |
 | **Brands Page** | **Product Details** |
-| ![Brands](screenshots/brands.png) | ![Product Details](screenshots/productDetails.png) |
+| ![Brands](screenShots/brands.png) | ![Product Details](screenShots/productDetails.png) |
 
 ### 🛒 Shopping Experience
 | Wishlist | Shopping Cart |
 | :---: | :---: |
-| ![Wishlist](screenshots/wishlist.png) | ![Cart](screenshots/cart.png) |
+| ![Wishlist](screenShots/wishlist.png) | ![Cart](screenShots/cart.png) |
 | **Checkout Process** | **Order Confirmation** |
-| ![Checkout](screenshots/checkOut.png) | ![Order Shipped](screenshots/order%20shipped%20notification.png) |
+| ![Checkout](screenShots/checkOut.png) | ![Order Shipped](screenShots/order%20shipped%20notification.png) |
 
 ### 🔐 User Account
 | Login Page |
 | :---: |
-| ![Login](screenshots/login.png) |
+| ![Login](screenShots/login.png) |
 
 ---
 
