@@ -1,27 +1,81 @@
-# AngularEcommerce
+# 🛒 FreshCart - Angular E-Commerce App
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.17.
+A comprehensive e-commerce application built with **Angular 17**. This project features a full shopping experience from product browsing to checkout, with a responsive design and user authentication.
 
-## Development server
+## 🚀 Live Demo
+> **Check out the live version here:** [https://angular-ecommerce-murex.vercel.app](https://angular-ecommerce-murex.vercel.app)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+---
 
-## Code scaffolding
+## 📱 Application Preview
+![App Walkthrough](screenshots/all.gif)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+---
 
-## Build
+## 📸 Screenshots & Features
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### 🛍️ Browsing & Discovery
+| Home Page | Categories |
+| :---: | :---: |
+| ![Home Page](screenshots/home.png) | ![Categories](screenshots/categories.png) |
+| **Brands Page** | **Product Details** |
+| ![Brands](screenshots/brands.png) | ![Product Details](screenshots/productDetails.png) |
 
-## Running unit tests
+### 🛒 Shopping Experience
+| Wishlist | Shopping Cart |
+| :---: | :---: |
+| ![Wishlist](screenshots/wishlist.png) | ![Cart](screenshots/cart.png) |
+| **Checkout Process** | **Order Confirmation** |
+| ![Checkout](screenshots/checkOut.png) | ![Order Shipped](screenshots/order%20shipped%20notification.png) |
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### 🔐 User Account
+| Login Page |
+| :---: |
+| ![Login](screenshots/login.png) |
 
-## Running end-to-end tests
+---
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## ✨ Key Features
 
-## Further help
+- **Authentication:** Secure Login/Register functionality.
+- **Product Filtering:** Filter products by Categories and Brands.
+- **Wishlist:** Save items for later.
+- **Cart Management:** Add/Remove items, adjust quantities, and calculate totals.
+- **Checkout System:** User-friendly checkout form with shipping details.
+- **Responsive UI:** Optimized for all screen sizes.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+---
+
+## 🛠️ Tech Stack
+
+- **Framework:** [Angular 17](https://angular.io/)
+- **Styling:** CSS / Bootstrap / Tailwind (Update based on your usage)
+- **Routing:** Angular Router
+- **HTTP:** Angular HttpClient
+- **Deployment:** Vercel
+
+---
+
+## 💻 Run Locally
+
+Clone the project
+
+```bash
+git clone [https://github.com/mahmoud-mousa2468/angular-ecommerce.git](https://github.com/mahmoud-mousa2468/angular-ecommerce.git)
+
+Go to the project directory
+
+Bash
+
+cd angular-ecommerce
+Install dependencies
+
+Bash
+
+npm install
+Start the server
+
+Bash
+
+ng serve
+Navigate to http://localhost:4200/.
