@@ -53,9 +53,11 @@ export class HomeComponent implements OnInit {
     navSpeed: 700,
     items: 1,
     nav: false,
+    rtl: true
   };
   categoryOptions: OwlOptions = {
     loop: true,
+    rtl: true,
     mouseDrag: true,
     touchDrag: true,
     pullDrag: false,
