@@ -1,68 +1,81 @@
-@if (products.length>0) {
-<section class="pt-4 pb-2 container-fluid">
-  <h2 class="text-capitalize">all product</h2>
-  <div class="row justify-content-center g-4">
-    @for (product of products|paginate: { id: 'productPaginate', itemsPerPage:
-    pageSize, currentPage: currentPage, totalItems: total }; track $index) {
-    <div class="col-sm-6 col-md-2">
-      <div class="product p-2">
-        @if (!wishList.includes(product._id)) {
-        <span (click)="addToWishList(product.id)"
-          ><i class="fa-regular fa-heart heart"></i
-        ></span>
-        } @else if (wishList.includes(product._id)) {
-        <span (click)="removeFromWishList(product.id)"
-          ><i class="fa-solid fa-heart heart text-danger"></i
-        ></span>
-        }
-        <header role="button" [routerLink]="['/productdetail', product.id]">
-          <img
-            class="w-100"
-            [src]="product.imageCover"
-            [title]="product.title"
-            [alt]="product.title"
-          />
-          <h3 class="h6 small text-main mt-1">{{ product.category.name }}</h3>
-          <div>
-            <h4 class="h6 text-main">{{ product.title | cuttext : 2 }}</h4>
+@if (products.length > 0) {
+  <section class="pt-4 pb-2 container-fluid">
+    <h2 class="text-capitalize">{{ "PRODUCT.ALL_PRODUCTS" | translate }}</h2>
+    <div class="row justify-content-center g-4">
+      @for (
+        product of products
+          | paginate
+            : {
+                id: "productPaginate",
+                itemsPerPage: pageSize,
+                currentPage: currentPage,
+                totalItems: total,
+              };
+        track $index
+      ) {
+        <div class="col-sm-6 col-md-2">
+          <div class="product p-2">
+            @if (!wishList.includes(product._id)) {
+              <span (click)="addToWishList(product.id)"
+                ><i class="fa-regular fa-heart heart"></i
+              ></span>
+            } @else if (wishList.includes(product._id)) {
+              <span (click)="removeFromWishList(product.id)"
+                ><i class="fa-solid fa-heart heart text-danger"></i
+              ></span>
+            }
+            <header role="button" [routerLink]="['/productdetail', product.id]">
+              <img
+                class="w-100"
+                [src]="product.imageCover"
+                [title]="product.title"
+                [alt]="product.title"
+              />
+              <h3 class="h6 small text-main mt-1">
+                {{ product.category.name }}
+              </h3>
+              <div>
+                <h4 class="h6 text-main">{{ product.title | cuttext: 2 }}</h4>
+              </div>
+              <div class="d-flex justify-content-between">
+                <span>
+                  {{ product.price | number: "1.0-0" }}{{ "PRODUCT.EGP"| translate }}
+                </span>
+                <span
+                  ><i class="fas fa-star rating-color me-1"> </i
+                  >{{ product.ratingsAverage }}</span
+                >
+              </div>
+            </header>
+            <footer>
+              <button
+                (click)="addtocart(product.id)"
+                [disabled]="isLoading"
+                class="text-capitalize btn-main w-100"
+              >
+                {{ "PRODUCT.ADD_TO_CART" | translate }}
+              </button>
+            </footer>
           </div>
-          <div class="d-flex justify-content-between">
-            <span> {{ product.price | currency : "EGP" }} </span>
-            <span
-              ><i class="fas fa-star rating-color me-1"> </i
-              >{{ product.ratingsAverage }}</span
-            >
-          </div>
-        </header>
-        <footer>
-          <button
-            (click)="addtocart(product.id, btnAdd)"
-            #btnAdd
-            class="text-capitalize btn-main w-100"
-          >
-            add to cart
-          </button>
-        </footer>
-      </div>
+        </div>
+      }
     </div>
-    }
-  </div>
-  <div class="d-flex justify-content-center mt-2">
-    <pagination-controls
-      id="productPaginate"
-      (pageChange)="pageChanged($event)"
-      (pageBoundsCorrection)="pageChanged($event)"
-      [maxSize]="9"
-      [directionLinks]="true"
-      [autoHide]="true"
-      [responsive]="true"
-      previousLabel="Previous"
-      nextLabel="Next"
-      screenReaderPaginationLabel="Pagination"
-      screenReaderPageLabel="page"
-      screenReaderCurrentLabel="You're on page"
-    >
-    </pagination-controls>
-  </div>
-</section>
+    <div class="d-flex justify-content-center mt-2">
+      <pagination-controls
+        id="productPaginate"
+        (pageChange)="pageChanged($event)"
+        (pageBoundsCorrection)="pageChanged($event)"
+        [maxSize]="9"
+        [directionLinks]="true"
+        [autoHide]="true"
+        [responsive]="true"
+        previousLabel="{{ 'PRODUCT.PREVIOUS' | translate }}"
+        nextLabel="{{ 'PRODUCT.NEXT' | translate }}"
+        screenReaderPaginationLabel="Pagination"
+        screenReaderPageLabel="page"
+        screenReaderCurrentLabel="You're on page"
+      >
+      </pagination-controls>
+    </div>
+  </section>
 }

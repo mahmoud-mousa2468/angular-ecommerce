@@ -1,8 +1,8 @@
-export interface Ibrand {
+export interface Icategorydetails {
   _id: string;
   name: string;
   slug: string;
-  image: string;
+  category: string;
   createdAt: string;
   updatedAt: string;
 }

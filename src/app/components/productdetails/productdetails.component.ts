@@ -1,10 +1,10 @@
-import { Component, inject, OnInit, Renderer2 } from '@angular/core';
+import { CurrencyPipe } from '@angular/common';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { ToastrService } from 'ngx-toastr';
-import { CartService } from '../../core/services/cart.service';
-import { ProductService } from '../../core/services/product.service';
-import { CurrencyPipe } from '@angular/common';
+import { CartService,ProductService } from '../../core/services';
 
 @Component({
   selector: 'app-productdetails',
@@ -17,8 +17,9 @@ export class ProductdetailsComponent implements OnInit {
 private readonly _ActivatedRoute =inject(ActivatedRoute)
 private readonly _ProductService=inject(ProductService)
 private readonly _CartService=inject(CartService)
-private readonly _Renderer2=inject(Renderer2)
 private readonly _ToastrService=inject(ToastrService)
+private destroyRef = inject(DestroyRef)
+isLoading=false
 Productid:any;
 productData:any=null
 productCarousel: OwlOptions = {
@@ -33,10 +34,10 @@ productCarousel: OwlOptions = {
     nav: true
   }
 ngOnInit(): void {
-  this._ActivatedRoute.paramMap.subscribe({
+  this._ActivatedRoute.paramMap.pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
 next:(p)=>{
 this.Productid=p.get('id');
-  this._ProductService.getspecificProduct(this.Productid).subscribe({
+  this._ProductService.getspecificProduct(this.Productid).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
     next:(res)=>{
       console.log(res.data);
       this.productData=res.data
@@ -47,19 +48,14 @@ this.Productid=p.get('id');
 }
   })
 }
-addToCart(id:any,element:HTMLButtonElement):void{
-    this._Renderer2.setAttribute(element,'disabled','true')
-    this._CartService.addProductToCart(id).subscribe({
+addToCart(id:any):void{
+  this.isLoading=true
+    this._CartService.addProductToCart(id).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next:(res)=>{
-        console.log(res)
         if(res.status=='success'){
-          this._CartService.cartNum.next(res.numOfCartItems);
           this._ToastrService.success(res.message,'Fresh Cart')
-          this._Renderer2.removeAttribute(element,'disabled')
+          this.isLoading=false
         }
-      },error:(err)=>{
-        console.log(err)
-        this._Renderer2.removeAttribute(element,'disabled')
       }
     })
   }

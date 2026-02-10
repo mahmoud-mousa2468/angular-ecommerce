@@ -1,134 +1,168 @@
 <!-- static slider for category  using carousel -->
-@if(categories.length>0){
-<section class="container-fluid pt-4">
-  <div class="row gx-0">
-    <div class="col-sm-6 col-md-9">
-      <owl-carousel-o [options]="mainSlider">
-        <ng-template carouselSlide
-          ><img
-            height="400px"
-            src="https://ecommerce.routemisr.com/Route-Academy-categories/1681511865180.jpeg"
-            alt=""
-        /></ng-template>
-        <ng-template carouselSlide
-          ><img
-            height="400px"
-            src="https://ecommerce.routemisr.com/Route-Academy-categories/1681511427130.png"
-            alt=""
-        /></ng-template>
-        <ng-template carouselSlide
-          ><img
-            height="400px"
-            src="https://ecommerce.routemisr.com/Route-Academy-categories/1681511452254.png"
-            alt=""
-        /></ng-template>
-      </owl-carousel-o>
-    </div>
-    <div class="col-sm-6 col-md-3">
-      <img
-        width="100%"
-        height="200px"
-        src="https://ecommerce.routemisr.com/Route-Academy-categories/1681511964020.jpeg"
-        alt=""
-      />
-      <img
-        width="100%"
-        height="200px"
-        src="https://ecommerce.routemisr.com/Route-Academy-categories/1681511818071.jpeg"
-        alt=""
-      />
-    </div>
-  </div>
-</section>
-}
-<!-- dynamic slider for category using carousel-->
-@if(categories.length>0){
-<section class="container-fluid py-4">
-  <h2 class="text-capitalize">popular categories</h2>
-  <owl-carousel-o [options]="categoryOptions">
-    @for (category of categories; track category._id) {
-    <ng-template carouselSlide [id]="category._id">
-      <img
-        height="300px"
-        [src]="category.image"
-        [alt]="category.name"
-        [title]="category.name"
-      />
-      <h3 class="h6 text-main">{{ category.name }}</h3>
-    </ng-template>
-    }
-  </owl-carousel-o>
-</section>
-}
-<!-- popular product -->
-@if (products.length>0) {
-<section class="pt-4 pb-2 container-fluid">
-  <h2 class="text-capitalize">popular products</h2>
-  <input
-    type="text"
-    class="form-control w-50 mx-auto form-control-sm my-3"
-    placeholder="Search..."
-    [(ngModel)]="term"
-  />
-  <div class="row g-3">
-    @for (product of products.slice(0,24)|search:term; track $index) {
-    <div class="col-sm-6 col-md-3 col-lg-2">
-      <div class="product p-1 small">
-        @if (!wishList.includes(product._id)) {
-        <span (click)="addToWishList(product.id)"
-          ><i class="fa-regular fa-heart heart"></i
-        ></span>
-        } @else if (wishList.includes(product._id)) {
-        <span (click)="removeFromWishList(product.id)"
-          ><i class="fa-solid fa-heart heart text-danger"></i
-        ></span>
-        }
-        <header role="button" [routerLink]="['/productdetails', product.id]">
-          <img
-            class="w-100"
-            [src]="product.imageCover"
-            [title]="product.title"
-            [alt]="product.title"
-          />
-          <h4 class="h5 text-main">{{ product.category.name }}</h4>
-          <h5 class="h6 text-main">{{ product.title | cuttext : 2 }}</h5>
-          <div class="d-flex justify-content-between">
-            <span>
-              {{ product.price | currency : "USD" : "symbol" : "1.0-0" }}
-            </span>
-            <div>
-              @for (num of [1,2,3,4,5].slice(0,product.ratingsAverage); track
-              $index) {
-              <span
-                class="star"
-                [ngStyle]="{ background: getStarBackground(1) }"
-              >
-              </span>
-              } @if (product.ratingsAverage%1!==0) {
-              <span
-                class="star"
-                [ngStyle]="{
-                  background: getStarBackground(product.ratingsAverage % 1)
-                }"
-              >
-              </span>
-              }
-              <span class="ms-1">{{ product.ratingsAverage }}</span>
-            </div>
-          </div>
-        </header>
-        <footer>
-          <button
-            (click)="addtocart(product.id, btnAdd)"
-            #btnAdd
-            class="text-capitalize btn-main w-100"
-          >
-            add to cart
+@if (categories.length > 0) {
+  <section class="container-fluid pt-4">
+    <div class="row gx-0">
+      <div class="col-sm-6 col-md-9">
+        <owl-carousel-o [options]="mainSlider" #owlCar>
+          <ng-template carouselSlide
+            ><img
+              height="400px"
+              src="https://ecommerce.routemisr.com/Route-Academy-categories/1681511865180.jpeg"
+              alt=""
+          /></ng-template>
+          <ng-template carouselSlide
+            ><img
+              height="400px"
+              src="https://ecommerce.routemisr.com/Route-Academy-categories/1681511427130.png"
+              alt=""
+          /></ng-template>
+          <ng-template carouselSlide
+            ><img
+              height="400px"
+              src="https://ecommerce.routemisr.com/Route-Academy-categories/1681511452254.png"
+              alt=""
+          /></ng-template>
+        </owl-carousel-o>
+        <div class="d-flex justify-content-center mt-3 gap-3">
+          <button class="btn-slider" (click)="owlCar.prev()">
+            <i class="fa-solid fa-chevron-left"></i>
           </button>
-        </footer>
+
+          <button class="btn-slider" (click)="owlCar.next()">
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <img
+          width="100%"
+          height="200px"
+          src="https://ecommerce.routemisr.com/Route-Academy-categories/1681511964020.jpeg"
+          alt=""
+        />
+        <img
+          width="100%"
+          height="200px"
+          src="https://ecommerce.routemisr.com/Route-Academy-categories/1681511818071.jpeg"
+          alt=""
+        />
       </div>
     </div>
-    }
-  </div>
-</section>
+  </section>
+}
+<!-- dynamic slider for category using carousel-->
+@if (categories.length > 0) {
+  <section class="container-fluid py-4">
+    <h2 class="text-capitalize">{{ "HOME.POPULAR_CATEGORIES" | translate }}</h2>
+    <owl-carousel-o [options]="categoryOptions" #owlCar>
+      @for (category of categories; track category._id) {
+        <ng-template carouselSlide [id]="category._id">
+          <img
+            height="300px"
+            [src]="category.image"
+            [alt]="category.name"
+            [title]="category.name"
+          />
+          <h3 class="h6 text-main">{{ category.name }}</h3>
+        </ng-template>
+      }
+    </owl-carousel-o>
+    <div class="d-flex justify-content-center mt-3 gap-3">
+      <button class="btn-slider" (click)="owlCar.prev()">
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
+
+      <button class="btn-slider" (click)="owlCar.next()">
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+    </div>
+  </section>
+}
+@defer (on viewport) {
+  <!-- popular product -->
+  @if (products.length > 0) {
+    <section class="pt-4 pb-2 container-fluid">
+      <h2 class="text-capitalize">{{ "HOME.POPULAR_PRODUCTS" | translate }}</h2>
+      <input
+        type="text"
+        class="form-control w-50 mx-auto form-control-sm my-3"
+        placeholder="{{ 'HOME.SEARCH_PLACEHOLDER' | translate }}"
+        [(ngModel)]="term"
+      />
+      <div class="row g-3">
+        @for (product of products.slice(0, 24) | search: term; track $index) {
+          <div class="col-sm-6 col-md-3 col-lg-2">
+            <div class="product p-1 small">
+              @if (!_WishlistService.wishlistData().includes(product._id)) {
+                <span (click)="addToWishList(product.id)"
+                  ><i class="fa-regular fa-heart heart"></i
+                ></span>
+              } @else if (_WishlistService.wishlistData().includes(product._id)) {
+                <span (click)="removeFromWishList(product.id)"
+                  ><i class="fa-solid fa-heart heart text-danger"></i
+                ></span>
+              }
+              <header
+                role="button"
+                [routerLink]="['/productdetails', product.id]"
+              >
+                <img
+                  class="w-100"
+                  [src]="product.imageCover"
+                  [title]="product.title"
+                  [alt]="product.title"
+                />
+                <h4 class="h5 text-main force-ltr">
+                  {{ product.category.name }}
+                </h4>
+                <h5 class="h6 text-main force-ltr">
+                  {{ product.title | cuttext: 2 }}
+                </h5>
+                <div class="d-flex justify-content-between">
+                  <span>
+                    {{ product.price | number: "1.0-0" }}
+                    {{ "PRODUCT.EGP" | translate }}
+                  </span>
+                  <div>
+                    @for (
+                      num of [1, 2, 3, 4, 5].slice(0, product.ratingsAverage);
+                      track $index
+                    ) {
+                      <span
+                        class="star"
+                        [ngStyle]="{ background: getStarBackground(1) }"
+                      >
+                      </span>
+                    }
+                    @if (product.ratingsAverage % 1 !== 0) {
+                      <span
+                        class="star"
+                        [ngStyle]="{
+                          background: getStarBackground(
+                            product.ratingsAverage % 1
+                          ),
+                        }"
+                      >
+                      </span>
+                    }
+                    <span class="ms-1">{{ product.ratingsAverage }}</span>
+                  </div>
+                </div>
+              </header>
+              <footer>
+                <button
+                  (click)="addtocart(product.id)"
+                  class="text-capitalize btn-main w-100"
+                >
+                  {{ "PRODUCT.ADD_TO_CART" | translate }}
+                </button>
+              </footer>
+            </div>
+          </div>
+        }
+      </div>
+    </section>
+  }
+} @placeholder {
+  <p>Loading Products...</p>
 }

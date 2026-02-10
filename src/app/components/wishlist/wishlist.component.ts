@@ -1,73 +1,81 @@
-import { Component, inject, OnInit, Renderer2 } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
-import { Iproduct } from '../../core/interfaces/iproduct';
-import { CartService } from '../../core/services/cart.service';
-import { WishlistService } from '../../core/services/wishlist.service';
-import { NgStyle, CurrencyPipe } from '@angular/common';
+import { CurrencyPipe, DecimalPipe, NgStyle } from '@angular/common';
+import {
+  Component,
+  DestroyRef,
+  inject,
+  OnInit
+} from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { Iproduct } from '../../core/interfaces';
 import { CuttextPipe } from '../../core/pipes/cuttext.pipe';
+import { CartService,WishlistService } from '../../core/services';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-wishlist',
   standalone: true,
-  imports: [RouterLink, NgStyle, CuttextPipe, CurrencyPipe],
+  imports: [RouterLink, NgStyle, CuttextPipe,DecimalPipe,TranslateModule],
 
   templateUrl: './wishlist.component.html',
   styleUrl: './wishlist.component.scss',
 })
 export class WishlistComponent implements OnInit {
   products: Iproduct[] = [];
-  private readonly _Renderer2 = inject(Renderer2);
+  isLoading = false; // to controll disable buttons while loading
   private readonly _CartService = inject(CartService);
   private readonly _ToastrService = inject(ToastrService);
-  private readonly _WishlistService = inject(WishlistService);
+  readonly _WishlistService = inject(WishlistService);
+  private destroyRef = inject(DestroyRef);
   wishList: string[] = [];
   ngOnInit(): void {
-    this._WishlistService.getAllWishlist().subscribe({
-      next: (res) => {
-        this.products = res.data;
-      },
-    });
-    this._WishlistService.getAllWishlist().subscribe({
-      next: (res) => {
-        // map convert data structure from array of object to array of string (to get id in array structure)
-        this.wishList = res.data.map((term: any) => term._id);
-      },
-    });
+    this._WishlistService
+      .getAllWishlist()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: (res) => {
+          this.products = res.data;
+        },
+      });
   }
-  addtocart(id: any, element: HTMLButtonElement): void {
-    this._Renderer2.setAttribute(element, 'disabled', 'true');
-    this._CartService.addProductToCart(id).subscribe({
-      next: (res) => {
-        if (res.status == 'success') {
-          this._CartService.cartNum.next(res.numOfCartItems);
-          this._ToastrService.success(res.message, 'Fresh Cart');
-          this._Renderer2.removeAttribute(element, 'disabled');
-        }
-      },
-    });
+  addtocart(id: any): void {
+    this.isLoading = true;
+    this._CartService
+      .addProductToCart(id)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: (res) => {
+          if (res.status == 'success') {
+            this._ToastrService.success(res.message, 'Fresh Cart');
+            this.isLoading = false;
+          }
+        },
+      });
   }
   addToWishList(prodId: any): void {
-    this._WishlistService.addProductToWishlist(prodId).subscribe({
-      next: (res) => {
-        this._ToastrService.success(res.message);
-        this.wishList = res.data;
-        this._WishlistService.productsWishListNum.next(res.data.length);
-      },
-    });
+    this._WishlistService
+      .addProductToWishlist(prodId)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: (res) => {
+          this._ToastrService.success(res.message);
+        },
+      });
   }
   removeFromWishList(prodId: any): void {
-    this._WishlistService.removeFromWishlist(prodId).subscribe({
-      next: (res) => {
-        this._ToastrService.success(res.message);
-        this.wishList = res.data;
-        this._WishlistService.productsWishListNum.next(res.data.length);
-        const newProductsData = this.products.filter((product: any) =>
-          this.wishList.includes(product._id)
-        );
-        this.products = newProductsData;
-      },
-    });
+    this._WishlistService
+      .removeFromWishlist(prodId)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: (res) => {
+          this._ToastrService.success(res.message);
+          const newProductsData = this.products.filter((product: any) =>
+            this._WishlistService.wishlistData().includes(product._id)
+          );
+          this.products = newProductsData;
+        },
+      });
   }
   getStarBackground(filledFraction: number): string {
     // Generate the linear gradient: a percentage of gold and the rest transparent

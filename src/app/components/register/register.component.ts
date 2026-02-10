@@ -1,13 +1,15 @@
-import { Component, inject } from '@angular/core';
+import { Component, DestroyRef, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AuthService } from '../../core/services/auth.service';
+import { AuthService } from '../../core/services';
 import { Router } from '@angular/router';
 import { RxwebValidators } from '@rxweb/reactive-form-validators';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule,TranslateModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss',
 })
@@ -16,6 +18,7 @@ export class RegisterComponent {
   private readonly _FormBuilder = inject(FormBuilder);
   private readonly _AuthService = inject(AuthService);
   private readonly _Router = inject(Router);
+  private destroyRef = inject(DestroyRef)
   registerForm: FormGroup = this._FormBuilder.group({
     name: [
       null,
@@ -44,7 +47,7 @@ export class RegisterComponent {
     this.isloading = true;
     if (this.registerForm.valid) {
       let userData = this.registerForm.value;
-      this._AuthService.signUp(userData).subscribe({
+      this._AuthService.signUp(userData).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
         next: (res) => {
           if (res.message == 'success') {
             this.isloading = false;

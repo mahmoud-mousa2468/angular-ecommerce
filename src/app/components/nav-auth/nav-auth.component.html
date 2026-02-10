@@ -20,10 +20,19 @@
           <a href=""><i class="fa-brands fa-youtube fa-lg"></i></a>
         </li>
         <li class="nav-item me-3">
-          <a class="nav-link" routerLink="/login" routerLinkActive="active-link">Login</a>
+          <a class="nav-link" routerLink="/login" routerLinkActive="active-link">{{'NAV.LOGIN' | translate}}</a>
         </li>
         <li class="nav-item me-3">
-          <a class="nav-link" routerLink="/register" routerLinkActive="active-link">Register</a>
+          <a class="nav-link" routerLink="/register" routerLinkActive="active-link">{{'NAV.REGISTER' | translate}}</a>
+        </li>
+        <li class="nav-item me-3">
+          <a class="nav-link  cr btn bg-main" (click)="changeLanguage()">
+            @if (_TranslateService.getCurrentLang() === "en") {
+              عربي
+            } @else {
+              English
+            }
+          </a>
         </li>
       </ul>
     </div>

@@ -1,20 +1,24 @@
 @if (cart.totalCartPrice > 0) {
-  <section class="container-fluid rounded shadow pt-3 pb-3 px-5 my-3">
+  <section
+    #cartSection
+    class="container-fluid rounded shadow pt-3 pb-3 px-5 my-3"
+  >
     <div class="d-flex justify-content-between align-items-center">
-      <h2 class="text-capitalize fw-bolder">shop cart</h2>
+      <h2 class="text-capitalize fw-bolder">{{ "CART.TITLE" | translate }}</h2>
       <!-- Button trigger modal -->
       <button
         type="button"
-        (click)="setParamFun(1)"
+        (click)="setParamFun(null)"
         class="btn btn-outline-danger text-capitalize"
         data-bs-toggle="modal"
         data-bs-target="#exampleModal"
       >
-        clear cart
+        {{ "CART.CLEAR_CART" | translate }}
       </button>
     </div>
     <p class="text-main mb-4 h4">
-      {{ cart.totalCartPrice | currency: "EGP " }}
+      {{ cart.totalCartPrice | number: "1.0-0" }}
+      {{ "PRODUCT.EGP" | translate }}
     </p>
     <div class="row">
       @for (item of cart.products; track $index) {
@@ -30,7 +34,9 @@
         >
           <div>
             <h3>{{ item.product.title }}</h3>
-            <h4 class="h6 text-main">{{ item.price | currency: "EGP " }}</h4>
+            <h4 class="h6 text-main">
+              {{ item.price | number: "1.0-0" }} {{ "PRODUCT.EGP" | translate }}
+            </h4>
             <!-- Button trigger modal -->
             <button
               type="button"
@@ -40,26 +46,25 @@
               data-bs-target="#exampleModal"
             >
               <i class="fas fa-trash-can fa-2x text-danger"></i>
-              <button class="btn btn-outline-danger">Remove</button>
+              <button class="btn btn-outline-danger">
+                {{ "CART.REMOVE" | translate }}
+              </button>
             </button>
           </div>
+          `
           <div class="d-flex align-items-center">
             <button
               class="btn btn-outline-danger p-1 me-1"
-              (click)="
-                changeCount(item.product._id, item.count - 1, icon1, icon2)
-              "
-              #icon1
+              (click)="changeCount(item.product._id, item.count - 1)"
+              [disabled]="isLoading"
             >
               <i class="fas fa-minus"></i>
             </button>
             <span class="text-main h6 m-0">{{ item.count }}</span>
             <button
               class="btn btn-outline-success p-1 ms-1"
-              (click)="
-                changeCount(item.product._id, item.count + 1, icon1, icon2)
-              "
-              #icon2
+              (click)="changeCount(item.product._id, item.count + 1)"
+              [disabled]="isLoading"
             >
               <i class="fas fa-plus"></i>
             </button>
@@ -71,7 +76,7 @@
       [routerLink]="['/payment', cart._id]"
       class="btn-main text-capitalize mt-3"
     >
-      online payment
+      {{ "CART.ONLINE_PAYMENT" | translate }}
       <img
         width="50px"
         height="10px"
@@ -80,49 +85,55 @@
       />
     </button>
   </section>
+  <!-- Modal -->
+  @defer (on hover(cartSection)) {
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1
+              class="modal-title fs-5 text-capitalize text-danger"
+              id="exampleModalLabel"
+            >
+              {{ modalTitle | translate }}
+            </h1>
+            <button
+              type="button"
+              class="btn-close "
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body text-capitalize">
+            {{ modalBody | translate }}
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              {{ "MODAL.CLOSE" | translate }}
+            </button>
+            <button
+              type="button"
+              (click)="clickedFun()"
+              data-bs-dismiss="modal"
+              class="btn btn-danger text-capitalize"
+            >
+              {{ btnName | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
 } @else {
   <h2 class="text-capitalize text-center">your cart is empty</h2>
 }
-<!-- Modal -->
-<div
-  class="modal fade"
-  id="exampleModal"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1
-          class="modal-title fs-5 text-capitalize text-danger"
-          id="exampleModalLabel"
-        >
-          {{ modalTitle }}
-        </h1>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
-      </div>
-      <div class="modal-body text-capitalize">
-        {{ modalBody }}
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-          Close
-        </button>
-        <button
-          type="button"
-          (click)="clickedFun()"
-          data-bs-dismiss="modal"
-          class="btn btn-danger text-capitalize"
-        >
-          {{ btnName }}
-        </button>
-      </div>
-    </div>
-  </div>
-</div>

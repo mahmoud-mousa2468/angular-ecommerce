@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import {
   ReactiveFormsModule,
   FormBuilder,
@@ -6,8 +6,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CartService } from '../../core/services/cart.service';
-import { OrderService } from '../../core/services/order.service';
+import { CartService,OrderService } from '../../core/services';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-payment',
@@ -22,16 +22,17 @@ export class PaymentComponent implements OnInit {
   private readonly _OrdersService = inject(OrderService);
   private readonly _CartService = inject(CartService);
   private readonly _Router = inject(Router);
+  private destroyRef = inject(DestroyRef)
   id: any;
   ngOnInit(): void {
-    this._CartService.getLoggedUserCart().subscribe({
+    this._CartService.getLoggedUserCart().pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: (res) => {
         if (res.data.totalCartPrice <= 0) {
           this._Router.navigate(['/cart']);
         }
       },
     });
-    this._ActivatedRoute.paramMap.subscribe({
+    this._ActivatedRoute.paramMap.pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: (res) => {
         this.id = res.get('id');
       },
@@ -47,14 +48,13 @@ export class PaymentComponent implements OnInit {
   });
   handelForm(): void {
     this._OrdersService
-      .checkOutSession(this.id, this.orderForm.value)
+      .checkOutSession(this.id, this.orderForm.value).pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: (res) => {
           if (res.status == 'success') {
             // if success u will direct to https://checkout.stripe.com/ to enter Visa Info then allOrders component
-            console.log(res.session.url);
-            window.open(res.session.url, '_self');
-            this._CartService.cartNum.next(0);
+            window.open(res.session?.url, '_self');
+            this._CartService.cartNum.set(0);
           }
         },
       });

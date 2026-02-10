@@ -1,62 +1,44 @@
 import {
   Component,
-  ElementRef,
+  DestroyRef,
   HostListener,
-  inject,
-  OnInit,
-  Renderer2,
-  ViewChild,
+  inject
 } from '@angular/core';
-import { CartService } from '../../core/services/cart.service';
-import { WishlistService } from '../../core/services/wishlist.service';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import {
+  CartService,
+  MyTranslateService,
+  WishlistService,
+} from '../../core/services';
 
 @Component({
   selector: 'app-nav-blank',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive],
+  imports: [RouterLink, RouterLinkActive, TranslateModule],
   templateUrl: './nav-blank.component.html',
   styleUrl: './nav-blank.component.scss',
 })
-export class NavBlankComponent implements OnInit {
-  @ViewChild('navbar') navElement!: ElementRef;
-  private readonly _Renderer2 = inject(Renderer2);
-  @HostListener('window:scroll')
-  onScroll(): void {
-    if (scrollY > 500) {
-      this._Renderer2.addClass(this.navElement.nativeElement, 'px-5');
-      this._Renderer2.addClass(this.navElement.nativeElement, 'shadow');
-    } else {
-      this._Renderer2.removeClass(this.navElement.nativeElement, 'px-5');
-      this._Renderer2.removeClass(this.navElement.nativeElement, 'shadow');
-    }
-  }
-  cartNum: any;
-  productsWishListNum: any;
+export class NavBlankComponent  {
   private readonly _Router = inject(Router);
-  private readonly _CartService = inject(CartService);
-  private readonly _WishlistService = inject(WishlistService);
-  ngOnInit(): void {
-    this._CartService.cartNum.subscribe({
-      next: (res) => {
-        this.cartNum = res;
-      },
-    });
-    this._WishlistService.productsWishListNum.subscribe({
-      next: (res) => {
-        this.productsWishListNum = res;
-      },
-    });
-    this._WishlistService.getAllWishlist().subscribe({
-      next: (res) => {
-        this.productsWishListNum = res.count;
-      },
-    });
-    this._CartService.getLoggedUserCart().subscribe({
-      next: (res) => {
-        this.cartNum = res.numOfCartItems;
-      },
-    });
+  readonly _CartService = inject(CartService);
+  readonly _WishlistService = inject(WishlistService);
+  private destroyRef = inject(DestroyRef);
+  isScrolled = false;
+
+  readonly _MyTranslateService = inject(MyTranslateService);
+  readonly _TranslateService = inject(TranslateService); // 1. بنحقن دي عشان نعرف اللغة الحالية
+  // 2. دالة التغيير الجديدة (Toggle)
+  changeLanguage(): void {
+    const currentLang = this._TranslateService.getCurrentLang(); // بنجيب اللغة الحالية
+    const newLang = currentLang === 'en' ? 'ar' : 'en'; // بنعكسها
+
+    this._MyTranslateService.changeLang(newLang); // بننفذ التغيير
+  }
+  
+  @HostListener('window:scroll')
+  onScroll() {
+    this.isScrolled = window.scrollY > 30;
   }
   signOut(): void {
     localStorage.removeItem('userToken');

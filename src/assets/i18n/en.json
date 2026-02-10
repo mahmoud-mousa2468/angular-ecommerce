@@ -1,0 +1,85 @@
+{
+  "NAV": {
+    "HOME": "Home",
+    "PRODUCTS": "Products",
+    "CATEGORIES": "Categories",
+    "BRANDS": "Brands",
+    "LOGIN": "Login",
+    "REGISTER": "Register",
+    "SIGNOUT": "SignOut"
+  },
+  "BRAND": {
+    "ALL_BRANDS": "All Brands"
+  },
+  "AUTH": {
+    "LOGIN_TITLE": "Login",
+    "REGISTER_TITLE": "Register",
+    "FORGET_TITLE": "Forget Password",
+    "RESET_TITLE": "Reset Password",
+    "VERIFY_TITLE": "Verify Code",
+    "NAME": "Name",
+    "EMAIL": "E-mail",
+    "PASSWORD": "Password",
+    "REPASSWORD": "Re-Password",
+    "PHONE": "Phone",
+    "SUBMIT": "Submit",
+    "FORGET_BTN": "Forget Password?",
+    "NEW_PASSWORD": "New Password",
+    "RESET_CODE": "Reset Code"
+  },
+  "VALIDATION": {
+    "REQUIRED": "This field is required",
+    "EMAIL_INVALID": "Email is incorrect",
+    "PHONE_INVALID": "Phone is incorrect",
+    "PASSWORD_INVALID": "Password must be at least 6 characters long and contain only alphanumeric characters (letters and numbers), underscores (_), or the at symbol (@).",
+    "MISMATCH": "Password doesn't match",
+    "MIN_LENGTH": "Name min length is 3",
+    "MAX_LENGTH": "Name max length is 20"
+  },
+  "HOME": {
+    "POPULAR_PRODUCTS": "Popular Products",
+    "POPULAR_CATEGORIES": "Popular Categories",
+    "SEARCH_PLACEHOLDER": "Search by name..."
+  },
+  "PRODUCT": {
+    "ADD_TO_CART": "Add to Cart",
+    "EGP": "EGP",
+    "ALL_PRODUCTS": "All Products",
+    "NEXT": "Next",
+    "PREVIOUS": "Previous"
+  },
+  "CART": {
+    "TITLE": "Shop Cart",
+    "TOTAL_PRICE": "Total Cart Price",
+    "CLEAR_CART": "Clear Cart",
+    "ONLINE_PAYMENT": "Online Payment Payment",
+    "EMPTY": "Your cart is empty",
+    "REMOVE": "Remove"
+  },
+  "PAYMENT": {
+    "DETAILS": "Details",
+    "PHONE": "Phone",
+    "CITY": "City",
+    "PAY_NOW": "Pay Now"
+  },
+  "MODAL": {
+    "CLEAR_TITLE": "Clear Cart",
+    "CLEAR_BODY": "Are you sure you want to clear all items?",
+    "REMOVE_TITLE": "Remove Item",
+    "REMOVE_BODY": "Are you sure you want to remove this item?",
+    "CONFIRM_CLEAR": "Clear All",
+    "CONFIRM_REMOVE": "Remove",
+    "CLOSE": "Close"
+  },
+  "FOOTER": {
+    "GET_APP": "Get The FreshCart App",
+    "SEND_LINK_TEXT": "We Will Send You a Link, Open it on Your Phone to download the app",
+    "SHARE_LINK": "Share App Link",
+    "PAYMENT_PARTNERS": "Payment Partners",
+    "DELIVERIES": "Get deliveries with FreshCart",
+    "INPUT_PLACEHOLDER": "Email"
+  },
+  "NOT_FOUND": {
+    "GO_BACK": "Go Back"
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "NAV": {
+    "HOME": "الرئيسية",
+    "PRODUCTS": "المنتجات",
+    "CATEGORIES": "الأقسام",
+    "BRANDS": "الماركات",
+    "WISHLIST": "المفضلة",
+    "LOGIN": "دخول",
+    "REGISTER": "تسجيل",
+    "SIGNOUT": "خروج"
+  },
+  "BRAND": {
+    "ALL_BRANDS": "جميع الماركات"
+  },
+  "AUTH": {
+    "LOGIN_TITLE": "تسجيل الدخول",
+    "REGISTER_TITLE": "إنشاء حساب جديد",
+    "FORGET_TITLE": "نسيت كلمة المرور",
+    "RESET_TITLE": "تعيين كلمة المرور",
+    "VERIFY_TITLE": "كود التحقق",
+    "NAME": "الاسم",
+    "EMAIL": "البريد الإلكتروني",
+    "PASSWORD": "كلمة المرور",
+    "REPASSWORD": "تأكيد كلمة المرور",
+    "PHONE": "رقم الهاتف",
+    "SUBMIT": "تأكيد",
+    "FORGET_BTN": "هل نسيت كلمة المرور؟",
+    "NEW_PASSWORD": "كلمة مرور جديدة",
+    "RESET_CODE": "كود الاستعادة"
+  },
+  "VALIDATION": {
+    "REQUIRED": "هذا الحقل مطلوب",
+    "EMAIL_INVALID": "البريد الإلكتروني غير صحيح",
+    "PHONE_INVALID": "رقم الهاتف غير صحيح",
+    "PASSWORD_INVALID": "كلمة السر يجب أن يتكون من 6 خانات على الأقل، ويُسمح فيه فقط باستخدام الحروف (الإنجليزي)، الأرقام، الشرطة السفلية (_)، أو علامة الـ (@).",
+    "MISMATCH": "كلمة المرور غير متطابقة",
+    "MIN_LENGTH": "الاسم يجب أن يكون 3 أحرف على الأقل",
+    "MAX_LENGTH": "الاسم يجب ألا يزيد عن 20 حرفاً"
+  },
+  "HOME": {
+    "POPULAR_PRODUCTS": "المنتجات الشائعة",
+    "POPULAR_CATEGORIES": "الأقسام الشائعة",
+    "SEARCH_PLACEHOLDER": "ابحث بالاسم..."
+  },
+  "PRODUCT": {
+    "ADD_TO_CART": "أضف للسلة",
+    "EGP": "ج.م",
+    "ALL_PRODUCTS": "جميع المنتجات",
+    "NEXT": "التالي",
+    "PREVIOUS": "السابق"
+  },
+  "CART": {
+    "TITLE": "عربة التسوق",
+    "TOTAL_PRICE": "إجمالي السلة",
+    "CLEAR_CART": "إفراغ السلة",
+    "ONLINE_PAYMENT": "دفع أونلاين",
+    "EMPTY": "سلة التسوق فارغة",
+    "REMOVE": "حذف"
+  },
+  "PAYMENT": {
+    "DETAILS": "التفاصيل",
+    "PHONE": "الهاتف",
+    "CITY": "المدينة",
+    "PAY_NOW": "ادفع الآن"
+  },
+  "MODAL": {
+    "CLEAR_TITLE": "إفراغ السلة",
+    "CLEAR_BODY": "هل أنت متأكد من حذف جميع المنتجات؟",
+    "REMOVE_TITLE": "حذف منتج",
+    "REMOVE_BODY": "هل أنت متأكد من حذف هذا المنتج؟",
+    "CONFIRM_CLEAR": "مسح الكل",
+    "CONFIRM_REMOVE": "حذف",
+    "CLOSE": "إغلاق"
+  },
+  "FOOTER": {
+    "GET_APP": "حمل تطبيق فريش كارت",
+    "SEND_LINK_TEXT": "سنرسل لك رابط التحميل على هاتفك",
+    "SHARE_LINK": "مشاركة الرابط",
+    "PAYMENT_PARTNERS": "شركاء الدفع",
+    "DELIVERIES": "توصيل سريع مع فريش كارت",
+    "INPUT_PLACEHOLDER": "البريد الإلكتروني"
+  },
+  "NOT_FOUND": {
+    "GO_BACK": "العودة للرئيسية"
+  }
+}

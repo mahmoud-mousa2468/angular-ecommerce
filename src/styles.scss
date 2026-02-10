@@ -6,7 +6,8 @@
 :root {
   --main-color: #0aad0a;
   --light-color: #f0f3f2;
-  --shadow: rgba(145, 158, 171, 0.2) 0px 2px 4px -1px,
+  --shadow:
+    rgba(145, 158, 171, 0.2) 0px 2px 4px -1px,
     rgba(145, 158, 171, 0.14) 0px 4px 5px 0px,
     rgba(145, 158, 171, 0.12) 0px 1px 10px 0px;
   --font-family: "Encode Sans Expanded", sans-serif;
@@ -154,4 +155,90 @@ a:hover {
     39% 35%
   );
   background-size: 100%;
+}
+
+/* تعديلات Owl Carousel */
+.btn-slider {
+  background-color: var(--main-color); /* اللون الأخضر بتاعك */
+  color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%; /* شكل دائري */
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  transition: transform 0.3s;
+
+  &:hover {
+    background-color: #088a08; /* تغميق اللون عند اللمس */
+    transform: scale(1.1); /* تكبير بسيط */
+  }
+
+  &:active {
+    transform: scale(0.9); /* تصغير عند الضغط */
+  }
+}
+
+/* كلاس لإجبار النص على الظهور بالإنجليزية */
+.force-ltr {
+  direction: ltr !important;
+  text-align: left !important;
+  unicode-bidi: embed; /* لضمان عدم تداخل الحروف والعلامات */
+}
+
+/* ===========================================
+   RTL & LTR Logic (منطق الاتجاهات)
+   =========================================== */
+
+/* 1. ضبط الاتجاهات للغة العربية فقط */
+html[dir="rtl"] {
+  body {
+    text-align: right;
+    direction: rtl;
+  }
+
+  /* عكس المسافات في البوتستراب للعربي */
+  .me-auto {
+    margin-left: auto !important;
+    margin-right: 0 !important;
+  }
+
+  .ms-auto {
+    margin-right: auto !important;
+    margin-left: 0 !important;
+  }
+
+  /* تصحيح مكان زر إغلاق المودال في العربي */
+  .modal-header {
+    position: relative;
+    .btn-close {
+      margin: 0 !important;
+      position: absolute !important;
+      left: 15px !important;
+      right: auto !important;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+}
+
+/* 2. ضبط الاتجاهات للغة الإنجليزية (إعادة تعيين) */
+html[dir="ltr"] {
+  body {
+    text-align: left;
+    direction: ltr;
+  }
+
+  /* التأكد أن المسافات سليمة في الإنجليزي */
+  .me-auto {
+    margin-right: auto !important;
+    margin-left: 0 !important;
+  }
+
+  .ms-auto {
+    margin-left: auto !important;
+    margin-right: 0 !important;
+  }
 }

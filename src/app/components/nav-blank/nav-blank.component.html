@@ -1,37 +1,86 @@
-<nav #navbar class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+<nav
+  #navbar
+  [class.px-5]="isScrolled"
+  [class.shadow]="isScrolled"
+  [class.bg-light]="isScrolled"
+  class="navbar navbar-expand-lg navbar-light fixed-top"
+>
   <div class="container-fluid">
-    <a class="navbar-brand" href="#"><img src="./assets/images/freshcart-logo.svg" alt="fresh cart logo"></a>
-    <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId"
-      aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
+    <a class="navbar-brand" href="#"
+      ><img src="./assets/images/freshcart-logo.svg" alt="fresh cart logo"
+    /></a>
+    <button
+      class="navbar-toggler d-lg-none"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#collapsibleNavId"
+      aria-controls="collapsibleNavId"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="collapsibleNavId">
-      <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+      <ul class="navbar-nav me-auto mt-2 mt-lg-0 fw-bold">
         <li class="nav-item">
-          <a class="nav-link" routerLink="/home" routerLinkActive="active-link" aria-current="page">Home
+          <a
+            class="nav-link"
+            routerLink="/home"
+            routerLinkActive="active-link"
+            aria-current="page"
+            >{{ 'NAV.HOME' | translate }}
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/products" routerLinkActive="active-link">Products</a>
+          <a
+            class="nav-link"
+            routerLink="/products"
+            routerLinkActive="active-link"
+            >{{ 'NAV.PRODUCTS' | translate }}</a
+          >
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/brands" routerLinkActive="active-link">Brands</a>
+          <a
+            class="nav-link"
+            routerLink="/brands"
+            routerLinkActive="active-link"
+            >{{ 'NAV.BRANDS' | translate }}</a
+          >
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/categories" routerLinkActive="active-link">Categories</a>
+          <a
+            class="nav-link"
+            routerLink="/categories"
+            routerLinkActive="active-link"
+            >{{ 'NAV.CATEGORIES' | translate }}</a
+          >
         </li>
       </ul>
-      <ul class="navbar-nav ms-auto  mt-2 mt-lg-0 d-flex justify-content-between align-items-center">
-        <li class="nav-item me-3 ">
-          <a class="nav-link position-relative" routerLink="/wishlist" aria-current="page">
+      <ul
+        class="navbar-nav ms-auto mt-2 mt-lg-0 d-flex justify-content-between align-items-center fw-bold"
+      >
+        <li class="nav-item me-3">
+          <a
+            class="nav-link position-relative"
+            routerLink="/wishlist"
+            aria-current="page"
+          >
             <i class="fa-solid fa-heart text-danger fa-2x"></i>
-            <span class="badge bg-info position-absolute top-0 end-0"> {{productsWishListNum}} </span>
+            <span class="badge bg-info position-absolute top-0 end-0">
+              {{ _WishlistService.wishlistCount() }}
+            </span>
           </a>
         </li>
-        <li class="nav-item me-3 ">
-          <a class="nav-link position-relative" routerLink="/cart" aria-current="page">
-            <i class="fas fa-cart-shopping fa-2x text-main "></i>
-            <span class="badge bg-info position-absolute top-0 end-0"> {{cartNum}} </span>
+        <li class="nav-item me-3">
+          <a
+            class="nav-link position-relative"
+            routerLink="/cart"
+            aria-current="page"
+          >
+            <i class="fas fa-cart-shopping fa-2x text-main"></i>
+            <span class="badge bg-info position-absolute top-0 end-0">
+              {{ _CartService.cartNum() }}
+            </span>
           </a>
         </li>
         <li class="nav-item me-3">
@@ -47,8 +96,22 @@
           <a href=""><i class="fa-brands fa-youtube fa-lg"></i></a>
         </li>
         <li class="nav-item me-3">
-          <a class="nav-link cr btn btn-danger" routerLink="/login" routerLinkActive="active-link"
-            (click)="signOut()">SignOut</a>
+          <a
+            class="nav-link cr btn  btn-danger"
+            routerLink="/login"
+            routerLinkActive="active-link"
+            (click)="signOut()"
+            >{{ 'NAV.SIGNOUT' | translate }}</a
+          >
+        </li>
+        <li class="nav-item me-3">
+          <a class="nav-link  cr btn bg-main" (click)="changeLanguage()">
+            @if (_TranslateService.getCurrentLang() === "en") {
+              عربي
+            } @else {
+              English
+            }
+          </a>
         </li>
       </ul>
     </div>

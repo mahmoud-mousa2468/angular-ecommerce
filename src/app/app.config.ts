@@ -1,4 +1,5 @@
 import {
+  HttpClient,
   provideHttpClient,
   withFetch,
   withInterceptors,
@@ -11,12 +12,14 @@ import {
   withHashLocation,
   withInMemoryScrolling,
 } from '@angular/router';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { provideToastr } from 'ngx-toastr';
 import { routes } from './app.routes';
 import { errorInterceptor } from './core/interceptors/error.interceptor';
 import { headerInterceptor } from './core/interceptors/header.interceptor';
 import { loadInterceptor } from './core/interceptors/load.interceptor';
+import { httpLoaderFactory } from './core/loaders/http-loader';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(
@@ -31,6 +34,16 @@ export const appConfig: ApplicationConfig = {
     ),
     provideAnimations(),
     provideToastr(),
-    importProvidersFrom(NgxSpinnerModule),
+    importProvidersFrom(
+      NgxSpinnerModule,
+      TranslateModule.forRoot({
+        defaultLanguage: 'en',
+        loader: {
+          provide: TranslateLoader,
+          useFactory: httpLoaderFactory, // استخدام الدالة المعرفة بالأعلى
+          deps: [HttpClient], // استخدام HttpClient المستورد
+        },
+      }),
+    ),
   ],
 };

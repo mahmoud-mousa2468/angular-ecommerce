@@ -4,11 +4,11 @@
       @for (product of products; track $index) {
         <div class="col-sm-6 col-md-3 col-lg-2">
           <div class="product p-1 small">
-            @if (!wishList.includes(product._id)) {
+            @if (!_WishlistService.wishlistData().includes(product._id)) {
               <span (click)="addToWishList(product.id)"
                 ><i class="fa-regular fa-heart heart"></i
               ></span>
-            } @else if (wishList.includes(product._id)) {
+            } @else if (_WishlistService.wishlistData().includes(product._id)) {
               <span (click)="removeFromWishList(product.id)"
                 ><i class="fa-solid fa-heart heart text-danger"></i
               ></span>
@@ -27,7 +27,7 @@
               <h5 class="h6 text-main">{{ product.title | cuttext: 2 }}</h5>
               <div class="d-flex justify-content-between">
                 <span>
-                  {{ product.price | currency: "USD" : "symbol" : "1.0-0" }}
+                  {{ product.price | number : "1.0-0" }}{{ "PRODUCT.EGP" | translate }}
                 </span>
                 <div>
                   @for (
@@ -57,11 +57,11 @@
             </header>
             <footer>
               <button
-                (click)="addtocart(product.id, btnAdd)"
-                #btnAdd
+                (click)="addtocart(product.id)"
+                [disabled]="isLoading"
                 class="text-capitalize btn-main w-100"
               >
-                add to cart
+                {{ "PRODUCT.ADD_TO_CART" | translate }}
               </button>
             </footer>
           </div>

@@ -1,35 +1,40 @@
 @if (productData) {
-<section class="container pt-5 pb-4 my-auto">
-  <div class="row rounded shadow">
-    <div class="col-sm-12 col-md-3">
-      <owl-carousel-o [options]="productCarousel">
-        @for (product of productData.images; track productData._id) {
-        <ng-template carouselSlide [id]="productData._id">
-          <img width="100%" [src]="product" /> </ng-template
-        >}
-      </owl-carousel-o>
-    </div>
-    <div class="col-sm-12 col-md-9">
-      <div class="h-100 d-flex flex-column justify-content-center">
-        <h2 class="mb-3">{{ productData.title }}</h2>
-        <p class="lead mb-3">{{ productData.description }}</p>
-        <span class="mb-3"> {{ productData.category.name }} </span>
-        <div class="d-flex mb-3 justify-content-between align-items-center">
-          <span> {{ productData.price | currency : "EGP " }} </span>
-          <span>
-            <i class="fas fa-star rating-color me-1"> </i>
-            {{ productData.ratingsAverage }}
-          </span>
+  <section class="container pt-5 pb-4 my-auto">
+    <div class="row rounded shadow">
+      <div class="col-sm-12 col-md-3">
+        @defer (on viewport) {
+          <owl-carousel-o [options]="productCarousel">
+          @for (product of productData.images; track productData._id) {
+            <ng-template carouselSlide [id]="productData._id">
+              <img width="100%" [src]="product" />
+            </ng-template>
+          }
+        </owl-carousel-o>
+        }@placeholder{
+          <img [src]="productData.imageCover" class="w-100 opacity-50">
+        }
+      </div>
+      <div class="col-sm-12 col-md-9">
+        <div class="h-100 d-flex flex-column justify-content-center">
+          <h2 class="mb-3">{{ productData.title }}</h2>
+          <p class="lead mb-3">{{ productData.description }}</p>
+          <span class="mb-3"> {{ productData.category.name }} </span>
+          <div class="d-flex mb-3 justify-content-between align-items-center">
+            <span> {{ productData.price | currency: "EGP " }} </span>
+            <span>
+              <i class="fas fa-star rating-color me-1"> </i>
+              {{ productData.ratingsAverage }}
+            </span>
+          </div>
+          <button
+            (click)="addToCart(productData._id)"
+            [disabled]="isLoading"
+            class="btn-main w-100 text-capitalize"
+          >
+            add to cart
+          </button>
         </div>
-        <button
-          (click)="addToCart(productData._id, btn)"
-          #btn
-          class="btn-main w-100 text-capitalize"
-        >
-          add to cart
-        </button>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 }

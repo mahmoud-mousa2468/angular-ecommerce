@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../environments/environment';
+import { IApiResponse, IUser } from '../interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -9,20 +10,20 @@ import { environment } from '../environments/environment';
 export class AuthService {
 
   constructor(private _HttpClient:HttpClient) { }
-  signUp(userData:object):Observable<any>{
-    return this._HttpClient.post(environment.apiUrl+'auth/signup',userData)
+  signUp(userData:object):Observable<IApiResponse<IUser>>{
+    return this._HttpClient.post<IApiResponse<IUser>>(environment.apiUrl+'auth/signup',userData)
   }
-  signIn(userData:object):Observable<any>{
-    return this._HttpClient.post(environment.apiUrl+'auth/signin',userData)
+  signIn(userData:object):Observable<IApiResponse<IUser>>{
+    return this._HttpClient.post<IApiResponse<IUser>>(environment.apiUrl+'auth/signin',userData)
   }
-  forgotPassword(userEmail:object):Observable<any>{
-    return this._HttpClient.post(`${environment.apiUrl}auth/forgotPasswords`,userEmail)
+  forgotPassword(userEmail:object):Observable<IApiResponse<any>>{
+    return this._HttpClient.post<IApiResponse<any>>(`${environment.apiUrl}auth/forgotPasswords`,userEmail)
   }
-  verifyResetCode(resetCode:object):Observable<any>{
-    return this._HttpClient.post(`${environment.apiUrl}auth/verifyResetCode`,resetCode
+  verifyResetCode(resetCode:object):Observable<IApiResponse<any>>{
+    return this._HttpClient.post<IApiResponse<any>>(`${environment.apiUrl}auth/verifyResetCode`,resetCode
     )
   }
-  resetPassword(newPassword:object):Observable<any>{
-    return this._HttpClient.put(`${environment.apiUrl}auth/resetPassword`,newPassword)
+  resetPassword(newPassword:object):Observable<IApiResponse<any>>{
+    return this._HttpClient.put<IApiResponse<any>>(`${environment.apiUrl}auth/resetPassword`,newPassword)
   }
 }

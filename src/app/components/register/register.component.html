@@ -1,72 +1,122 @@
 <section class="rounded shadow w-75 m-auto my-3 p-3 bg-main-light">
   <form [formGroup]="registerForm" class="" (ngSubmit)="handleForm()">
-    <p class="text-capitalize">register now</p>
+    <p class="text-capitalize">{{ "AUTH.REGISTER_TITLE" | translate }}</p>
     <div class="form-item">
-      <label for="name">Name</label>
-      <input class="form-control" formControlName="name" type="text" name="name" id="name">
-      @if (registerForm.get('name')?.errors&&registerForm.get('name')?.touched ) {
-      <div class="alert alert-danger p-1 small ">
-        @if (registerForm.get('name')?.getError('required') ) {
-        <p class="mb-0">Name is Required</p>
-        }@else if (registerForm.get('name')?.getError('minlength')) {
-        <p class="mb-0">Name Min Length 3</p>
-        }@else if (registerForm.get('name')?.getError('maxlength')) {
-        <p class="mb-0">Name Max Length 20</p>
-        }
-      </div>
+      <label for="name">{{ "AUTH.NAME" | translate }}</label>
+      <input
+        class="form-control"
+        formControlName="name"
+        type="text"
+        name="name"
+        id="name"
+      />
+      @if (
+        registerForm.get("name")?.errors && registerForm.get("name")?.touched
+      ) {
+        <div class="alert alert-danger p-1 small">
+          @if (registerForm.get("name")?.getError("required")) {
+            <p class="mb-0">{{ "VALIDATION.REQUIRED" | translate }}</p>
+          } @else if (registerForm.get("name")?.getError("minlength")) {
+            <p class="mb-0">{{ "VALIDATION.MIN_LENGTH" | translate }}</p>
+          } @else if (registerForm.get("name")?.getError("maxlength")) {
+            <p class="mb-0">{{ "VALIDATION.MAX_LENGTH" | translate }}</p>
+          }
+        </div>
       }
     </div>
     <div class="form-item">
-      <label for="email">E-mail</label>
-      <input class="form-control" formControlName="email" type="email" name="email" id="email">
-      @if (registerForm.get('email')?.errors&&registerForm.get('email')?.touched ) {
-      <div class="alert alert-danger p-1 small ">
-        @if (registerForm.get('email')?.getError('required') ) {
-        <p class="mb-0">email is Required</p>
-        }@else if (registerForm.get('email')?.getError('email')) {
-        <p class="mb-0">Email is inCorrect</p>
-        }
-      </div>}
+      <label for="email">{{ "AUTH.EMAIL" | translate }}</label>
+      <input
+        class="form-control"
+        formControlName="email"
+        type="email"
+        name="email"
+        id="email"
+      />
+      @if (
+        registerForm.get("email")?.errors && registerForm.get("email")?.touched
+      ) {
+        <div class="alert alert-danger p-1 small">
+          @if (registerForm.get("email")?.getError("required")) {
+            <p class="mb-0">{{ "VALIDATION.REQUIRED" | translate }}</p>
+          } @else if (registerForm.get("email")?.getError("email")) {
+            <p class="mb-0">{{ "VALIDATION.EMAIL_INVALID" | translate }}</p>
+          }
+        </div>
+      }
     </div>
     <div class="form-item">
-      <label for="phone">Phone</label>
-      <input class="form-control" formControlName="phone" type="tel" name="phone" id="phone">
-      @if (registerForm.get('phone')?.errors&&registerForm.get('phone')?.touched ) {
-      <div class="alert alert-danger p-1 small ">
-        @if (registerForm.get('phone')?.getError('required') ) {
-        <p class="mb-0">Phone is Required</p>
-        }@else if (registerForm.get('phone')?.getError('pattern')) {
-        <p class="mb-0">Phone is inCorrect</p>
-        }
-      </div>}
+      <label for="phone">{{ "AUTH.PHONE" | translate }}</label>
+      <input
+        class="form-control"
+        formControlName="phone"
+        type="tel"
+        name="phone"
+        id="phone"
+      />
+      @if (
+        registerForm.get("phone")?.errors && registerForm.get("phone")?.touched
+      ) {
+        <div class="alert alert-danger p-1 small">
+          @if (registerForm.get("phone")?.getError("required")) {
+            <p class="mb-0">{{ "VALIDATION.REQUIRED" | translate }}</p>
+          } @else if (registerForm.get("phone")?.getError("pattern")) {
+            <p class="mb-0">{{ "VALIDATION.PHONE_INVALID" | translate }}</p>
+          }
+        </div>
+      }
     </div>
     <div class="form-item">
-      <label for="password">Password</label>
-      <input class="form-control" formControlName="password" type="password" name="password" id="password">
-      @if (registerForm.get('password')?.errors&&registerForm.get('password')?.touched ) {
-      <div class="alert alert-danger p-1 small ">
-        @if (registerForm.get('password')?.getError('required') ) {
-        <p class="mb-0">Password is Required</p>
-        }@else if (registerForm.get('password')?.getError('password')) {
-        <p class="mb-0">Password is inCorrect</p>
-        }
-      </div>}
+      <label for="password">{{ "AUTH.PASSWORD" | translate }}</label>
+      <input
+        class="form-control"
+        formControlName="password"
+        type="password"
+        name="password"
+        id="password"
+      />
+      @if (
+        registerForm.get("password")?.errors &&
+        registerForm.get("password")?.touched
+      ) {
+        <div class="alert alert-danger p-1 small">
+          @if (registerForm.get("password")?.getError("required")) {
+            <p class="mb-0">{{ "VALIDATION.REQUIRED" | translate }}</p>
+          } @else if (registerForm.get("password")?.getError("pattern")) {
+            <p class="mb-0">{{ "VALIDATION.PASSWORD_INVALID" | translate }}</p>
+          }
+        </div>
+      }
     </div>
     <div class="form-item">
-      <label for="rePassword">rePassword</label>
-      <input class="form-control" formControlName="rePassword" type="password" name="rePassword" id="rePassword">
-      @if (registerForm.get('rePassword')?.errors&&registerForm.get('rePassword')?.touched ) {
-      <div class="alert alert-danger p-1 small ">
-        @if (registerForm.get('rePassword')?.getError('required') ) {
-        <p class="mb-0">rePassword is Required</p>
-        }@else if (registerForm.get('rePassword')?.getError('compare')) {
-        <p class="mb-0">rePassword is inCorrect</p>
-        }
-      </div>}
+      <label for="rePassword">{{ "AUTH.REPASSWORD" | translate }}</label>
+      <input
+        class="form-control"
+        formControlName="rePassword"
+        type="password"
+        name="rePassword"
+        id="rePassword"
+      />
+      @if (
+        registerForm.get("rePassword")?.errors &&
+        registerForm.get("rePassword")?.touched
+      ) {
+        <div class="alert alert-danger p-1 small">
+          @if (registerForm.get("rePassword")?.getError("required")) {
+            <p class="mb-0">{{ "VALIDATION.REQUIRED" | translate }}</p>
+          } @else if (registerForm.get("rePassword")?.getError("compare")) {
+            <p class="mb-0">{{ "VALIDATION.MISMATCH" | translate }}</p>
+          }
+        </div>
+      }
     </div>
-    <button [disabled]="registerForm.invalid" class="btn-main mt-2 text-capitalize">register
-      @if (isloading ) {
-      <i class="fa-solid fa-spinner fa-spin"></i>
+    <button
+      [disabled]="registerForm.invalid"
+      class="btn-main mt-2 text-capitalize"
+    >
+      {{ "AUTH.REGISTER_TITLE" | translate }}
+      @if (isloading) {
+        <i class="fa-solid fa-spinner fa-spin"></i>
       }
     </button>
   </form>

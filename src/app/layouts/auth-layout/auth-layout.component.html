@@ -1,5 +1,9 @@
 <app-nav-auth></app-nav-auth>
-<div class="container-fluied">
+<div class="container-fluid">
   <router-outlet></router-outlet>
 </div>
-<app-footer></app-footer>
+@defer (on viewport) {
+  <app-footer></app-footer>
+} @placeholder {
+  <div class="text-center p-3">Loading Footer...</div>
+}

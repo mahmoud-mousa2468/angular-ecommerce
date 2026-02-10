@@ -1,6 +1,6 @@
 @if (brandsData.length>0) {
 <section class="pt-4 pb-2 container-fluid">
-  <h2 class="text-capitalize">all brands</h2>
+  <h2 class="text-capitalize">{{ "BRAND.ALL_BRANDS" | translate }}</h2>
   <div class="row justify-content-center g-4">
     @for (item of brandsData ; track $index) {
     <div class="col-sm-6 col-md-2">
