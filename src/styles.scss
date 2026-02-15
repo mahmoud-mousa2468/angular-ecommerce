@@ -242,3 +242,37 @@ html[dir="ltr"] {
     margin-right: 0 !important;
   }
 }
+
+
+
+
+/* تنسيقات خاصة بالموبايل والتابلت (الشاشات الصغيرة) */
+@media (max-width: 991px) {
+  .navbar-collapse {
+    background-color: #ffffff; /* خلفية بيضاء عشان تغطي اللي تحتها */
+    position: absolute;        /* عشان تفتح فوق المحتوى مش تزقه */
+    top: 100%;                 /* تبدأ من نهاية الناف بار */
+    left: 0;
+    right: 0;
+    z-index: 9999;             /* تضمن إنها فوق أي صورة */
+    padding: 20px;             /* هوامش داخلية للشياكة */
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1); /* ضل خفيف */
+    border-radius: 0 0 15px 15px; /* تدوير الحواف من تحت */
+  }
+
+  /* تضبيط اللينكات (الرئيسية، المنتجات...) */
+  .navbar-nav .nav-item {
+    text-align: center;       /* سنتر الكلام */
+    margin-bottom: 12px;      /* مسافة بين كل لينك والتاني */
+    border-bottom: 1px solid #f1f1f1; /* خط خفيف تحت كل عنصر */
+    padding-bottom: 8px;
+  }
+
+  /* تضبيط أيقونات السوشيال والزرار */
+  .navbar-nav.ms-auto {
+    margin-top: 15px;
+    flex-direction: row;      /* خليهم جنب بعض مش تحت بعض */
+    justify-content: center;  /* سنترهم */
+    gap: 10px;                /* مسافة بينهم */
+  }
+}
